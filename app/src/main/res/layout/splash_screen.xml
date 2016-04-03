@@ -4,6 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="bovin.project.musicxmood.SplashScreenActivity"
-    android:background="@drawable/splash_screen_1_small">
+    android:background="@drawable/background">
 
 </RelativeLayout>
