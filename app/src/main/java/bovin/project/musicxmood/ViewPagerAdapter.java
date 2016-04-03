@@ -22,19 +22,20 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
 
     public ViewPagerAdapter(Context context, FragmentManager fm, CharSequence Titles[], int numOfTabs, ArrayList<Music> musicArrayList){
         super(fm);
-        this.Titles= Titles;
-        this.numOfTabs=numOfTabs;
+        this.Titles = Titles;
+        this.numOfTabs = numOfTabs;
         this.context = context;
         this.musicArrayList = musicArrayList;
 
         Log.i("STACK!", "Entered ViewPagerAdapter");
 
-       // if(allMusicFragment == null)
+        if(allMusicFragment == null)
             allMusicFragment = new AllMusicFragment();
         allMusicFragment.setAllMusicArrayList(musicArrayList);
 
-        //if(artistsFragment == null)
-            artistsFragment = new ArtistsFragment(musicArrayList);
+        if(artistsFragment == null)
+            artistsFragment = new ArtistsFragment();
+        artistsFragment.setAllMusicArrayList(musicArrayList);
     }
 
     @Override

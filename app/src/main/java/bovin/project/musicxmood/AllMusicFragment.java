@@ -26,6 +26,7 @@ public class AllMusicFragment extends Fragment {
 
     @Override
     public void onAttach(Context context) {
+        Log.i("STACK!","Entered OnAttach AllMusicFragment");
         super.onAttach(context);
         this.context = context;
     }
@@ -33,6 +34,7 @@ public class AllMusicFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.i("STACK!", "Entered OnCreate AllMusicFragment");
         allMusicAdapter = new AllMusicRecyclerViewAdapter(context, allMusicArrayList);
     }
 
@@ -52,6 +54,7 @@ public class AllMusicFragment extends Fragment {
     }
 
     public void setAllMusicArrayList(ArrayList<Music> allMusicArrayList) {
+        Log.i("STACK!","Entered setAllMusicArrayList AllMusicFragment");
         this.allMusicArrayList = allMusicArrayList;
     }
 
@@ -59,6 +62,11 @@ public class AllMusicFragment extends Fragment {
     public void onDestroyView() {
         Log.i("STACK!","Entered OnDestroy AllMusicFragment");
         super.onDestroyView();
-        //allSongsFragmentView = null;
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putParcelableArrayList("MusicArrayList", allMusicArrayList);
+        super.onSaveInstanceState(outState);
     }
 }

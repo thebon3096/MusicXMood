@@ -5,6 +5,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,7 +33,7 @@ public class ArtistsRecyclerViewAdapter extends RecyclerView.Adapter<ArtistsRecy
     Music music;
     View itemView;
 
-    class ArtistsViewHolder extends RecyclerView.ViewHolder {
+    static class ArtistsViewHolder extends RecyclerView.ViewHolder {
         ImageView artistImage;
         TextView titleOfArtist;
         public ArtistsViewHolder(View itemView) {
@@ -44,6 +45,7 @@ public class ArtistsRecyclerViewAdapter extends RecyclerView.Adapter<ArtistsRecy
     }
 
     public ArtistsRecyclerViewAdapter(Context context, ArrayList<Music> musicArrayList){
+        Log.i("STACK!","Entered ArtistsRecyclerViewAdapter");
         this.context = context;
         this.musicArrayList = musicArrayList;
         this.artistSet = new TreeSet<>();
@@ -52,7 +54,6 @@ public class ArtistsRecyclerViewAdapter extends RecyclerView.Adapter<ArtistsRecy
 
     @Override
     public ArtistsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        System.gc();
         itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.artists_row, parent, false);
         return new ArtistsViewHolder(itemView);
@@ -62,19 +63,21 @@ public class ArtistsRecyclerViewAdapter extends RecyclerView.Adapter<ArtistsRecy
     public void onBindViewHolder(ArtistsViewHolder holder, int position) {
         music = musicArrayList.get(position);
         holder.titleOfArtist.setText(artistArrayList.get(position));
-        Picasso.with(context)
+        /*Picasso.with(context)
                 .load(music.getAlbumArt(context, artistArrayList.get(position), null))
-                .into(holder.artistImage);
+                .into(holder.artistImage);*/
+        holder.artistImage.setImageBitmap(MusicRetrieval.getAlbumArt(context, artistArrayList.get(position), null));
     }
 
     @Override
     public int getItemCount() {
+        Log.i("STACK!","Entered getItemCount ArtistsRecyclerViewAdapter");
         return artistArrayList.size();
     }
 
     ArrayList<String> makeArtistArrayList(){
         Music m;
-        for(int i=0; i<musicArrayList.size(); i++) {
+        for(int i=0; i < musicArrayList.size(); i++) {
             m = musicArrayList.get(i);
             artistSet.add(m.getArtist());
         }
@@ -86,7 +89,10 @@ public class ArtistsRecyclerViewAdapter extends RecyclerView.Adapter<ArtistsRecy
 
     @Override
     public void onViewDetachedFromWindow(ArtistsViewHolder holder) {
+        Log.i("STACK!","Entered OnViewDetachedFromWindow ArtistsRecyclerViewAdapter");
         super.onViewDetachedFromWindow(holder);
-        System.gc();
+
     }
+
+
 }

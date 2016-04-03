@@ -9,6 +9,9 @@ import android.util.Log;
 
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 /**
@@ -22,39 +25,55 @@ public class MainActivity extends AppCompatActivity{
     ViewPager vp;
     SmartTabLayout tabs;
     ArrayList<Music> musicArrayList;
+    MusicRetrieval musicRetrieval;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.i("STACK!","Entered OnCreate MainActivity");
+        Log.i("STACK!", "Entered OnCreate MainActivity");
         setContentView(R.layout.activity_main);
         fm = getSupportFragmentManager();
 
         Intent intent = getIntent();
-        musicArrayList =  intent.getParcelableArrayListExtra("MusicArrayList");
+        if(savedInstanceState == null)
+            musicArrayList =  intent.getParcelableArrayListExtra("MusicArrayList");
+        else{
+            musicArrayList = savedInstanceState.getParcelableArrayList("MusicArrayList");
+            musicRetrieval = new MusicRetrieval(getApplicationContext());
+        }
 
-        vpAdapter = new ViewPagerAdapter(getApplicationContext() ,fm, Titles, Titles.length, musicArrayList);
+
+        vpAdapter = new ViewPagerAdapter(getApplicationContext(), fm, Titles, Titles.length, musicArrayList);
         vp = (ViewPager)findViewById(R.id.mainViewPager);
         vp.setAdapter(vpAdapter);
 
         tabs = (SmartTabLayout) findViewById(R.id.mainViewPagerTabs);
         tabs.setDistributeEvenly(false);
-        tabs.setCustomTabColorizer(new SmartTabLayout.TabColorizer() {
+        /*tabs.setCustomTabColorizer(new SmartTabLayout.TabColorizer() {
             @Override
             public int getIndicatorColor(int position) {
                 return getResources().getColor(R.color.colorAccent);
             }
+
             @Override
             public int getDividerColor(int position) {
                 return 0;
             }
         });
-
+*/
         tabs.setViewPager(vp);
     }
 
     @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        Log.i("STACK!", "OnSaveInstanceState MainACtivity");
+        outState.putParcelableArrayList("MusicArrayList", musicArrayList);
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
     protected void onDestroy() {
+        Log.i("STACK!", "Entered OnDestroy MainActivity");
         super.onDestroy();
     }
 }

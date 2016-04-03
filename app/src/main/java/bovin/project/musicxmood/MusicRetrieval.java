@@ -27,12 +27,12 @@ public class MusicRetrieval {
     Context context;
     String sortOrder, selection, mimeTypeFromExtension;
     String[] selectionArgs, projection;
-    //Bitmap albumArt;
+    Bitmap albumArt;
     Long id, duration;
     String title, artist, path;
     Uri externalMusicUri;
     int titleColumn, artistColumn, idColumn, durationColumn, pathColumn;
-
+    private static DrawableBitmaps drawableBitmaps;
 
     public MusicRetrieval(Context context){
         this.context = context;
@@ -44,6 +44,7 @@ public class MusicRetrieval {
         sortOrder = MediaStore.Audio.Media.TITLE + " ASC";
         mimeTypeFromExtension = MimeTypeMap.getSingleton().getMimeTypeFromExtension("mp3");
         selectionArgs = new String[]{mimeTypeFromExtension};
+        drawableBitmaps = new DrawableBitmaps(context.getApplicationContext(), 50, 50);
     }
 
     public ArrayList<Music> getAllMusic(){
@@ -73,19 +74,14 @@ public class MusicRetrieval {
                 else*/
                 //albumArt = null;
                 musicArrayList.add(new Music(context, id, title, artist, duration, null));
+               // albumArt.recycle();
             }while(externalMusicCursor.moveToNext());
+        }
+        if (externalMusicCursor != null) {
             externalMusicCursor.close();
         }
-        externalMusicCursor.close();
         return musicArrayList;
     }
-
-   /* public Bitmap scaledAlbumArt(byte[] data){
-        BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inTempStorage = new byte[16*1024];
-        options.inSampleSize = 4;
-        return BitmapFactory.decodeByteArray(data, 0, data.length, options);
-    }*/
 
     class MusicRetrievalASyncTask extends AsyncTask<Void, Void, ArrayList<Music>> {
 
@@ -106,9 +102,200 @@ public class MusicRetrieval {
         protected void onPostExecute(ArrayList<Music> arrayList) {
             Intent i = new Intent(activity, MainActivity.class);
             i.putParcelableArrayListExtra("MusicArrayList", musicArrayList);
+            i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
             activity.startActivity(i);
             activity.finish();
             super.onPostExecute(arrayList);
         }
     }
+
+    public static Bitmap getAlbumArt(Context context, String name, Bitmap albumArtBitmap){
+        if(albumArtBitmap != null) {
+            // this.albumArt = new BitmapDrawable(context.getResources(), albumArtBitmap);
+        }else{
+            albumArtBitmap = MusicRetrieval.getAlbumArtLetter(name);
+        }
+        return albumArtBitmap;
+    }
+
+    private static Bitmap getAlbumArtLetter(String name){
+        int i=0;
+        char firstLetter = name.charAt(i);
+        while(!(Character.isLetter(firstLetter)) && i < name.length()-1) {
+            firstLetter = name.charAt(++i);
+        }
+        if(!(Character.isLetter(firstLetter))){
+            return drawableBitmaps.getA();
+        }
+
+        switch(firstLetter){
+            case 'a':
+            case 'A':
+                return drawableBitmaps.getA();
+            case 'b':
+            case 'B':
+                return drawableBitmaps.getB();
+            case 'c':
+            case 'C':
+                return drawableBitmaps.getC();
+            case 'd':
+            case 'D':
+                return drawableBitmaps.getD();
+            case 'e':
+            case 'E':
+                return drawableBitmaps.getE();
+            case 'f':
+            case 'F':
+                return drawableBitmaps.getF();
+            case 'g':
+            case 'G':
+                return drawableBitmaps.getG();
+            case 'h':
+            case 'H':
+                return drawableBitmaps.getH();
+            case 'i':
+            case 'I':
+                return drawableBitmaps.getI();
+            case 'j':
+            case 'J':
+                return drawableBitmaps.getJ();
+            case 'k':
+            case 'K':
+                return drawableBitmaps.getK();
+            case 'l':
+            case 'L':
+                return drawableBitmaps.getL();
+            case 'm':
+            case 'M':
+                return drawableBitmaps.getM();
+            case 'n':
+            case 'N':
+                return drawableBitmaps.getN();
+            case 'o':
+            case 'O':
+                return drawableBitmaps.getO();
+            case 'p':
+            case 'P':
+                return drawableBitmaps.getP();
+            case 'q':
+            case 'Q':
+                return drawableBitmaps.getQ();
+            case 'r':
+            case 'R':
+                return drawableBitmaps.getR();
+            case 's':
+            case 'S':
+                return drawableBitmaps.getS();
+            case 't':
+            case 'T':
+                return drawableBitmaps.getT();
+            case 'u':
+            case 'U':
+                return drawableBitmaps.getU();
+            case 'v':
+            case 'V':
+                return drawableBitmaps.getV();
+            case 'w':
+            case 'W':
+                return drawableBitmaps.getW();
+            case 'x':
+            case 'X':
+                return drawableBitmaps.getX();
+            case 'y':
+            case 'Y':
+                return drawableBitmaps.getY();
+            case 'z':
+            case 'Z':
+                return drawableBitmaps.getZ();
+        }
+        return drawableBitmaps.getA();
+        /*while(!(Character.isAlphabetic(firstLetter)) && i < name.length()-1) {
+            firstLetter = name.charAt(++i);
+        }
+        if(!(Character.isLetter(firstLetter))){
+            return R.drawable.splash_screen_1_small;
+        }*/
+        /*switch(firstLetter){
+            case 'a':
+            case 'A':
+                return R.drawable.a;
+            case 'b':
+            case 'B':
+                return R.drawable.b;
+            case 'c':
+            case 'C':
+                return R.drawable.c;
+            case 'd':
+            case 'D':
+                return R.drawable.d;
+            case 'e':
+            case 'E':
+                return R.drawable.e;
+            case 'f':
+            case 'F':
+                return R.drawable.f;
+            case 'g':
+            case 'G':
+                return R.drawable.g;
+            case 'h':
+            case 'H':
+                return R.drawable.h;
+            case 'i':
+            case 'I':
+                return R.drawable.i;
+            case 'j':
+            case 'J':
+                return R.drawable.j;
+            case 'k':
+            case 'K':
+                return R.drawable.k;
+            case 'l':
+            case 'L':
+                return R.drawable.l;
+            case 'm':
+            case 'M':
+                return R.drawable.m;
+            case 'n':
+            case 'N':
+                return R.drawable.n;
+            case 'o':
+            case 'O':
+                return R.drawable.o;
+            case 'p':
+            case 'P':
+                return R.drawable.p;
+            case 'q':
+            case 'Q':
+                return R.drawable.q;
+            case 'r':
+            case 'R':
+                return R.drawable.r;
+            case 's':
+            case 'S':
+                return R.drawable.s;
+            case 't':
+            case 'T':
+                return R.drawable.t;
+            case 'u':
+            case 'U':
+                return R.drawable.u;
+            case 'v':
+            case 'V':
+                return R.drawable.v;
+            case 'w':
+            case 'W':
+                return R.drawable.w;
+            case 'x':
+            case 'X':
+                return R.drawable.x;
+            case 'y':
+            case 'Y':
+                return R.drawable.y;
+            case 'z':
+            case 'Z':
+                return R.drawable.z;
+        }
+        return R.drawable.splash_screen_1_small;*/
+    }
+
 }

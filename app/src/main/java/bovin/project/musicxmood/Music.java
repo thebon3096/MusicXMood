@@ -30,7 +30,7 @@ public class Music implements Parcelable {
         this.artist = parcel.readString();
         this.mood = parcel.readString();
         this.duration = parcel.readLong();
-       // this.albumArtBitmap = parcel.readParcelable(getClass().getClassLoader());
+        //this.albumArtBitmap = parcel.readParcelable(getClass().getClassLoader());
     }
 
     //@TargetApi(Build.VERSION_CODES.LOLLIPOP)
@@ -41,7 +41,7 @@ public class Music implements Parcelable {
         this.artist = artist;
         this.mood = "<Undefined>";
         this.duration = duration;
-        //this.albumArtBitmap = albumArt;
+       // this.albumArtBitmap = albumArt;
     }
 
     public static final Creator<Music> CREATOR = new Creator<Music>() {
@@ -60,16 +60,7 @@ public class Music implements Parcelable {
         this._ID = _ID;
     }
 
-    public int getAlbumArt(Context context, String name, Bitmap albumArtBitmap){
-        if(albumArtBitmap != null) {
-           // this.albumArt = new BitmapDrawable(context.getResources(), albumArtBitmap);
-        }else{
-            this.albumArtID = getAlbumArtLetter(name);
-        }
-        return albumArtID;
-    }
-
-    /*public Bitmap getAlbumArtBitmap(){
+   /* public Bitmap getAlbumArtBitmap(){
         return albumArtBitmap;
     }*/
 
@@ -104,104 +95,7 @@ public class Music implements Parcelable {
     public long getDuration() {
         return duration;
     }
-
-    private int getAlbumArtLetter(String name){
-        int i=0;
-        char firstLetter = name.charAt(i);
-        while(!(Character.isLetter(firstLetter)) && i < name.length()-1) {
-            firstLetter = name.charAt(++i);
-        }
-        if(!(Character.isLetter(firstLetter))){
-            return R.drawable.a;
-        }
-        /*while(!(Character.isAlphabetic(firstLetter)) && i < name.length()-1) {
-            firstLetter = name.charAt(++i);
-        }
-        if(!(Character.isLetter(firstLetter))){
-            return R.drawable.splash_screen_1_small;
-        }*/
-        switch(firstLetter){
-            case 'a':
-            case 'A':
-                return R.drawable.a;
-            case 'b':
-            case 'B':
-                return R.drawable.b;
-            case 'c':
-            case 'C':
-                return R.drawable.c;
-            case 'd':
-            case 'D':
-                return R.drawable.d;
-            case 'e':
-            case 'E':
-                return R.drawable.e;
-            case 'f':
-            case 'F':
-                return R.drawable.f;
-            case 'g':
-            case 'G':
-                return R.drawable.g;
-            case 'h':
-            case 'H':
-                return R.drawable.h;
-            case 'i':
-            case 'I':
-                return R.drawable.i;
-            case 'j':
-            case 'J':
-                return R.drawable.j;
-            case 'k':
-            case 'K':
-                return R.drawable.k;
-            case 'l':
-            case 'L':
-                return R.drawable.l;
-            case 'm':
-            case 'M':
-                return R.drawable.m;
-            case 'n':
-            case 'N':
-                return R.drawable.n;
-            case 'o':
-            case 'O':
-                return R.drawable.o;
-            case 'p':
-            case 'P':
-                return R.drawable.p;
-            case 'q':
-            case 'Q':
-                return R.drawable.q;
-            case 'r':
-            case 'R':
-                return R.drawable.r;
-            case 's':
-            case 'S':
-                return R.drawable.s;
-            case 't':
-            case 'T':
-                return R.drawable.t;
-            case 'u':
-            case 'U':
-                return R.drawable.u;
-            case 'v':
-            case 'V':
-                return R.drawable.v;
-            case 'w':
-            case 'W':
-                return R.drawable.w;
-            case 'x':
-            case 'X':
-                return R.drawable.x;
-            case 'y':
-            case 'Y':
-                return R.drawable.y;
-            case 'z':
-            case 'Z':
-                return R.drawable.z;
-        }
-        return R.drawable.splash_screen_1_small;
-    }
+    
 
     @Override
     public int describeContents() {

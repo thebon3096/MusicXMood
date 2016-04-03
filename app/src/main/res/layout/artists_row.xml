@@ -41,7 +41,8 @@
                 android:ellipsize="marquee"
                 android:marqueeRepeatLimit ="marquee_forever"
                 android:textSize="15sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:layout_gravity="center"/>
 
     </LinearLayout>
 </LinearLayout>

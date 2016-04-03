@@ -9,10 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-
 import xyz.danoz.recyclerviewfastscroller.vertical.VerticalRecyclerViewFastScroller;
 
 /**
@@ -27,13 +24,22 @@ public class ArtistsFragment extends Fragment {
     VerticalRecyclerViewFastScroller artistFastScroller;
     View artistFragmentView;
 
-    public ArtistsFragment(ArrayList<Music> musicArrayList){
-        this.musicArrayList = musicArrayList;
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        Log.i("STACK!", "Entered OnSavedInstanceState ArtistFragment");
+        outState.putParcelableArrayList("MusicArrayList", musicArrayList);
+        super.onSaveInstanceState(outState);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         Log.i("STACK!", "Entered OnCreateView ArtistFragment");
+
         artistFragmentView = (View)inflater.inflate(R.layout.artists_fragment, container, false);
         artistRecyclerView = (RecyclerView) artistFragmentView.findViewById(R.id.artistsRecyclerView);
         artistRecyclerView.setAdapter(artistsRecyclerViewAdapter);
@@ -48,15 +54,18 @@ public class ArtistsFragment extends Fragment {
 
     @Override
     public void onAttach(Context context) {
-        super.onAttach(context);
+        Log.i("STACK!", "Entered OnAttach ArtistsFragment");
         this.context = context;
-        System.gc();
+        super.onAttach(context);
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+        Log.i("STACK!", "Entered OnCreate ArtistsFragment");
+        if(savedInstanceState != null)
+            musicArrayList = savedInstanceState.getParcelableArrayList("MusicArrayList");
         artistsRecyclerViewAdapter = new ArtistsRecyclerViewAdapter(context, musicArrayList);
+        super.onCreate(savedInstanceState);
     }
 
     public void setAllMusicArrayList(ArrayList<Music> allMusicArrayList){
@@ -67,6 +76,5 @@ public class ArtistsFragment extends Fragment {
     public void onDestroyView() {
         Log.i("STACK!", "Entered OnDestroyView ArtistFragment");
         super.onDestroyView();
-        //artistFragmentView = null;
     }
 }
