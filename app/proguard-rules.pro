@@ -18,3 +18,5 @@
 -keepclassmembers class * implements android.os.Parcelable {
     static ** CREATOR;
 }
+
+-dontwarn com.fmsirvent.ParallaxEverywhere.**
