@@ -4,20 +4,19 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
-        <item name="android:navigationBarColor">@color/metalGray</item>
-        <item name="android:statusBarColor">@color/metalGray</item>
+        <item name="android:navigationBarColor">@color/black</item>
+        <item name="android:statusBarColor">@color/black</item>
     </style>
 
     <style name="AppTheme.SplashActivity" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:background">@drawable/splash_screen_1_small</item>
-        <item name="android:statusBarColor">@color/IndigoBlue</item>
-        <item name="android:navigationBarColor">@color/IndigoBlue</item>
-        <item name="android:windowBackground">@drawable/splash_screen_1_small</item>
+        <item name="android:background">@drawable/background</item>
+        <item name="android:statusBarColor">@color/black</item>
+        <item name="android:navigationBarColor">@color/black</item>
+        <item name="android:windowBackground">@drawable/background</item>
     </style>
 
     <style name="AppTheme.Toolbar">
-            <item name="android:background">@color/darkNavyBlue</item>
-        <item name="android:elevation">10dp</item>
+            <item name="android:background">@color/black</item>
     </style>
 
 </resources>

@@ -20,7 +20,7 @@
 
         <com.ogaclejapan.smarttablayout.SmartTabLayout
             android:id="@+id/mainViewPagerTabs"
-            android:background="@color/darkBlue"
+            android:background="@color/materialGray"
             android:elevation="7dp"
             android:layout_width="match_parent"
             android:layout_height="48dp"
