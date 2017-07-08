@@ -9,7 +9,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import java.util.ArrayList;
+
 import xyz.danoz.recyclerviewfastscroller.vertical.VerticalRecyclerViewFastScroller;
 
 
@@ -26,7 +28,7 @@ public class AllMusicFragment extends Fragment {
 
     @Override
     public void onAttach(Context context) {
-        Log.i("STACK!","Entered OnAttach AllMusicFragment");
+        Log.i("STACK!", "Entered OnAttach AllMusicFragment");
         super.onAttach(context);
         this.context = context;
     }
@@ -54,13 +56,13 @@ public class AllMusicFragment extends Fragment {
     }
 
     public void setAllMusicArrayList(ArrayList<Music> allMusicArrayList) {
-        Log.i("STACK!","Entered setAllMusicArrayList AllMusicFragment");
+        Log.i("STACK!", "Entered setAllMusicArrayList AllMusicFragment");
         this.allMusicArrayList = allMusicArrayList;
     }
 
     @Override
     public void onDestroyView() {
-        Log.i("STACK!","Entered OnDestroy AllMusicFragment");
+        Log.i("STACK!", "Entered OnDestroy AllMusicFragment");
         super.onDestroyView();
     }
 

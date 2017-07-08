@@ -20,28 +20,34 @@ public class Music implements Parcelable {
     private String artist;
     private String mood;
     private long duration;
-    private int albumArtID;
+    private long albumID;
+    private String album;
+    private String path;
     Context context;
-    //private Bitmap albumArtBitmap;
 
-    public Music(Parcel parcel){
+    public Music(Parcel parcel) {
         this._ID = parcel.readLong();
         this.name = parcel.readString();
         this.artist = parcel.readString();
+        this.album = parcel.readString();
+        this.path = parcel.readString();
         this.mood = parcel.readString();
         this.duration = parcel.readLong();
-        //this.albumArtBitmap = parcel.readParcelable(getClass().getClassLoader());
+        this.albumID = parcel.readLong();
     }
 
-    //@TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public Music(Context context, long _ID, String name, String artist, long duration, Bitmap albumArt){
+    public Music(Context context, long _ID, String name, String artist, String album, String path,
+                 String mood, long duration, long albumID) {
         this.context = context;
-        this._ID=_ID;
-        this.name = name;
-        this.artist = artist;
-        this.mood = "<Undefined>";
+        this._ID = _ID;
+        this.name = (name != null) ? name:"<Undefined>";
+        this.artist = (artist != null) ? artist:"<Unknown>";
+        this.mood = (mood != null) ? mood:"<Undefined>";
         this.duration = duration;
-       // this.albumArtBitmap = albumArt;
+        this.albumID = albumID;
+        this.album = album;
+        this.path = path;
+        // this.albumArtBitmap = albumArt;
     }
 
     public static final Creator<Music> CREATOR = new Creator<Music>() {
@@ -95,7 +101,18 @@ public class Music implements Parcelable {
     public long getDuration() {
         return duration;
     }
-    
+
+    public long getAlbumID() {
+        return albumID;
+    }
+
+    public String getAlbum() {
+        return album;
+    }
+
+    public String getPath() {
+        return path;
+    }
 
     @Override
     public int describeContents() {
@@ -107,8 +124,10 @@ public class Music implements Parcelable {
         dest.writeLong(_ID);
         dest.writeString(name);
         dest.writeString(artist);
+        dest.writeString(album);
+        dest.writeString(path);
         dest.writeString(mood);
         dest.writeLong(duration);
-        //dest.writeParcelable(albumArtBitmap, flags);
+        dest.writeLong(albumID);
     }
 }

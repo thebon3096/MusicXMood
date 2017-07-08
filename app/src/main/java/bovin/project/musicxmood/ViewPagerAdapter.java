@@ -19,8 +19,10 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
     int numOfTabs;
     Context context;
     ArrayList<Music> musicArrayList;
+    private MoodMusicFragment moodMusicFragment;
 
-    public ViewPagerAdapter(Context context, FragmentManager fm, CharSequence Titles[], int numOfTabs, ArrayList<Music> musicArrayList){
+    public ViewPagerAdapter(Context context, FragmentManager fm, CharSequence Titles[],
+                            int numOfTabs, ArrayList<Music> musicArrayList) {
         super(fm);
         this.Titles = Titles;
         this.numOfTabs = numOfTabs;
@@ -29,21 +31,25 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
 
         Log.i("STACK!", "Entered ViewPagerAdapter");
 
-        if(allMusicFragment == null)
+        if (allMusicFragment == null)
             allMusicFragment = new AllMusicFragment();
         allMusicFragment.setAllMusicArrayList(musicArrayList);
 
-        if(artistsFragment == null)
+        if (artistsFragment == null)
             artistsFragment = new ArtistsFragment();
-        artistsFragment.setAllMusicArrayList(musicArrayList);
+
+        if(moodMusicFragment == null)
+            moodMusicFragment = new MoodMusicFragment();
     }
 
     @Override
     public Fragment getItem(int position) {
-        if(position==0){
+        if (position == 0) {
             return allMusicFragment;
-        }else {
+        } else if(position == 1){
             return artistsFragment;
+        }else{
+            return moodMusicFragment;
         }
     }
 

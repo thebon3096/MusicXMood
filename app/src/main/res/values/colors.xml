@@ -17,9 +17,10 @@
     <color name="black">#000000</color>
     <color name="lightNavyBlue">#335C81</color>
     <color name="darkNavyBlue">#0067c4</color>
-    <color name="metalGray">#4C6085</color>
+    <color name="Theme">#4C6085</color>
     <color name="offWhite">#f5f5f5</color>
     <color name="transparentGray">#c2757575</color>
     <color name="materialGray">#FF212121</color>
     <color name="transparentBlack">#b9000000</color>
+    <color name="transparent">#00000000</color>
 </resources>

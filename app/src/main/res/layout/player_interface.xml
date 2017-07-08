@@ -1,38 +1,52 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/offWhite">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <LinearLayout
+    <include layout="@layout/toolbar_actionbar"/>
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:background="@color/offWhite">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1.0"
-            android:padding="10dp">
+            android:orientation="vertical"
+            android:background="@color/offWhite">
 
-            <ImageView
-                android:id="@+id/albumArtCoverView"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/album" />
+                android:layout_weight="1.0">
+
+                <ImageView
+                    android:id="@+id/albumArtCoverView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/album"
+                    android:scaleType="centerCrop"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="3.0"/>
 
         </LinearLayout>
 
-        <LinearLayout
+        <fragment
+            android:id="@+id/controlFragment"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="3.0"/>
+            android:layout_height="wrap_content"
+            tools:layout="@layout/control_panel"
+            android:layout_alignParentBottom="true"
+            android:name="bovin.project.musicxmood.MusicPlayerControllerFragment" />
 
-    </LinearLayout>
+    </RelativeLayout>
 
-    <include
-        layout="@layout/panel"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:layout_alignParentBottom="true"/>
+</LinearLayout>
 
- </RelativeLayout>

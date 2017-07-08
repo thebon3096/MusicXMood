@@ -1,9 +1,8 @@
 package bovin.project.musicxmood;
 
-import android.app.Application;
 import android.content.Context;
-import android.net.Uri;
-import android.support.annotation.Nullable;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,12 +11,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
-
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -26,30 +21,38 @@ import java.util.TreeSet;
  */
 public class ArtistsRecyclerViewAdapter extends RecyclerView.Adapter<ArtistsRecyclerViewAdapter.ArtistsViewHolder> {
 
-    Context context;
-    ArrayList<Music> musicArrayList;
-    ArrayList<String> artistArrayList;
-    Set<String> artistSet;
-    Music music;
-    View itemView;
+    private static Context context;
+    private static ArrayList<String> artistArrayList;
+    private static Music music;
+    private static View itemView;
+    private static DatabaseHandler db;
 
-    static class ArtistsViewHolder extends RecyclerView.ViewHolder {
+    static class ArtistsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView artistImage;
         TextView titleOfArtist;
+        Intent intent;
+
         public ArtistsViewHolder(View itemView) {
             super(itemView);
-            titleOfArtist = (TextView)itemView.findViewById(R.id.titleOfArtist);
-            artistImage = (ImageView)itemView.findViewById(R.id.artistImage);
+            artistImage = (ImageView) itemView.findViewById(R.id.artistImage);
+            titleOfArtist = (TextView) itemView.findViewById(R.id.titleOfArtist);
             titleOfArtist.setSelected(true);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            intent = new Intent(context, ArtistMusicActivity.class);
+            intent.putExtra("titleOfArtist", titleOfArtist.getText());
+            context.startActivity(intent);
         }
     }
 
-    public ArtistsRecyclerViewAdapter(Context context, ArrayList<Music> musicArrayList){
-        Log.i("STACK!","Entered ArtistsRecyclerViewAdapter");
+    public ArtistsRecyclerViewAdapter(Context context, ArrayList<String> artistArrayList) {
+        Log.i("STACK!", "Entered ArtistsRecyclerViewAdapter");
+        this.db = new DatabaseHandler(context, null, null, 0);
         this.context = context;
-        this.musicArrayList = musicArrayList;
-        this.artistSet = new TreeSet<>();
-        this.artistArrayList = makeArtistArrayList();
+        this.artistArrayList = artistArrayList;
     }
 
     @Override
@@ -61,38 +64,24 @@ public class ArtistsRecyclerViewAdapter extends RecyclerView.Adapter<ArtistsRecy
 
     @Override
     public void onBindViewHolder(ArtistsViewHolder holder, int position) {
-        music = musicArrayList.get(position);
         holder.titleOfArtist.setText(artistArrayList.get(position));
         /*Picasso.with(context)
                 .load(music.getAlbumArt(context, artistArrayList.get(position), null))
                 .into(holder.artistImage);*/
-        holder.artistImage.setImageBitmap(MusicRetrieval.getAlbumArt(context, artistArrayList.get(position), null));
+        holder.artistImage.setImageBitmap(
+                Bitmap.createScaledBitmap(
+                        MusicRetrieval.getAlbumArt(context, artistArrayList.get(position), 0),
+                        DrawableBitmaps.dpToPx(50), DrawableBitmaps.dpToPx(50),
+                        false));
     }
 
     @Override
     public int getItemCount() {
-        Log.i("STACK!","Entered getItemCount ArtistsRecyclerViewAdapter");
         return artistArrayList.size();
-    }
-
-    ArrayList<String> makeArtistArrayList(){
-        Music m;
-        for(int i=0; i < musicArrayList.size(); i++) {
-            m = musicArrayList.get(i);
-            artistSet.add(m.getArtist());
-        }
-        artistArrayList = new ArrayList<>(artistSet);
-        Collections.sort(artistArrayList);
-        artistSet = null;
-        return artistArrayList;
     }
 
     @Override
     public void onViewDetachedFromWindow(ArtistsViewHolder holder) {
-        Log.i("STACK!","Entered OnViewDetachedFromWindow ArtistsRecyclerViewAdapter");
         super.onViewDetachedFromWindow(holder);
-
     }
-
-
 }

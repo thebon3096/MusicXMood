@@ -8,7 +8,7 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="AppTheme.NoActionBar">
+    <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
@@ -18,12 +18,11 @@
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="AppTheme.SplashActivity" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:background">@drawable/background</item>
-        <item name="android:windowBackground">@drawable/background</item>
+        <item name="android:windowBackground">@drawable/splash_screen_1_small</item>
     </style>
 
-    <style name="AppTheme.Toolbar">
-        <item name="android:background">@color/black</item>
+    <style name="AppTheme.Toolbar" parent="AppTheme.NoActionBar">
+        <item name="android:background">@color/darkNavyBlue</item>
     </style>
 
 </resources>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginBottom="70dp">
+
+    <ImageButton
+        android:id="@+id/happyMusicButton"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/button_shape_circle_normal"
+        android:layout_margin="20dp"
+        android:src="@drawable/happy"
+        android:scaleType="fitCenter"
+        android:onClick="onHappyButtonClicked"/>
+
+    <ImageButton
+        android:id="@+id/sadMusicButton"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_above="@+id/happyMusicButton"
+        android:layout_centerInParent="true"
+        android:background="@drawable/button_shape_circle_normal"
+        android:src="@drawable/sad"
+        android:scaleType="fitCenter"
+        android:onClick="onSadButtonClicked"/>
+
+    <ImageButton
+        android:id="@+id/energeticMusicButton"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_below="@+id/happyMusicButton"
+        android:layout_centerInParent="true"
+        android:background="@drawable/button_shape_circle_normal"
+        android:src="@drawable/energetic"
+        android:scaleType="fitCenter"
+        android:onClick="onEnergeticButtonClicked"/>
+
+</RelativeLayout>

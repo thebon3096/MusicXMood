@@ -14,8 +14,7 @@
         <ImageView
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:id="@+id/rowImage"
-            android:background="@drawable/a"/>
+            android:id="@+id/rowImage" />
     </LinearLayout>
 
     <LinearLayout
@@ -44,7 +43,8 @@
                 android:ellipsize="marquee"
                 android:marqueeRepeatLimit ="marquee_forever"
                 android:textSize="15sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:textColor="@color/black"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -56,18 +56,21 @@
                     android:textSize="13sp"
                     android:text="Medium Text"
                     android:id="@+id/nameOfArtist"
-                    android:layout_margin="0dp"/>
+                    android:layout_margin="0dp"
+                    android:textColor="@color/black"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=" | "/>
+                    android:text=" | "
+                    android:textColor="@color/black"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Mood"
-                    android:id="@+id/moodOfMusic"/>
+                    android:id="@+id/moodOfMusic"
+                    android:textColor="@color/black"/>
 
             </LinearLayout>
 

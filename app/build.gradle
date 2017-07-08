@@ -11,6 +11,7 @@ android {
         versionCode 1
         versionName "1.0"
         multiDexEnabled true
+        //vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
         release {
@@ -26,15 +27,15 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.2.0'
     compile 'com.android.support:support-v4:23.2.0'
     compile 'com.android.support:design:23.2.0'
-    compile 'com.android.support:design:23.0.1'
     compile 'com.ogaclejapan.smarttablayout:library:1.6.0@aar'
     compile 'xyz.danoz:recyclerviewfastscroller:0.1.3'
-    compile 'com.android.support:cardview-v7:23.2.0'
-    compile 'com.squareup.picasso:picasso:2.3.3'
     compile 'com.github.kanytu:android-parallax-recyclerview:v1.7'
+    compile files('C:/Users/Bonny Haveliwala/AndroidStudioProjects/MusicXMood/libs/JLayer1.0.1.jar')
+    compile files('C:/Users/Bonny Haveliwala/AndroidStudioProjects/MusicXMood/libs/mp3spi1.9.4.jar')
+    compile files('C:/Users/Bonny Haveliwala/AndroidStudioProjects/MusicXMood/libs/tritonus_share.jar')
 }
